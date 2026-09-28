@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة إدارة العمليات | شركة قمة الريادة للنقل والخدمات اللوجستية</title>
-    <!-- استدعاء مستقر وأكيد لمكتبة التصميم التفاعلي -->
+    <!-- استدعاء مستقر ومباشر لمكتبة التصميم التفاعلي -->
     <link href="https://jsdelivr.net" rel="stylesheet">
     <!-- استدعاء مكتبة الأيقونات الفنية FontAwesome -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         @import url('https://googleapis.com');
-        body { font-family: 'Cairo', sans-serif; background-color: #f8f9fa; }
-        .sidebar { background-color: #0f172a; min-height: 100vh; color: #fff; }
-        .sidebar .nav-link { color: #94a3b8; font-weight: 600; margin-bottom: 5px; border-radius: 8px; }
+        body { font-family: 'Cairo', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+        .sidebar { background-color: #0f172a; min-height: 100vh; color: #fff; padding-top: 20px; }
+        .sidebar .nav-link { color: #94a3b8; font-weight: 600; margin-bottom: 8px; border-radius: 8px; padding: 12px 15px; display: block; text-decoration: none; }
         .sidebar .nav-link.active { background-color: #f59e0b; color: #0f172a; }
         .sidebar .nav-link:hover:not(.active) { background-color: #1e293b; color: #fff; }
-        .kpi-card { border: none; border-radius: 16px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .kpi-icon { width: 48px; height: 48px; rounded: 12px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; }
-        .main-header { bg-color: #fff; border-bottom: 1px solid #edf2f7; padding: 20px 30px; }
+        .kpi-card { border: none; border-radius: 16px; background-color: #fff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e2e8f0; }
+        .kpi-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 20px; }
     </style>
 </head>
 <body>
@@ -26,7 +25,7 @@
         <div class="row">
             
             <!-- القائمة الجانبية (Sidebar) -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
+            <nav class="col-md-3 col-lg-2 sidebar p-3">
                 <div class="text-center my-4 pb-3 border-bottom border-secondary">
                     <div class="bg-warning text-dark d-inline-flex p-3 rounded-3 mb-2 shadow">
                         <i class="fa-solid fa-truck-fast fs-3"></i>
@@ -35,32 +34,26 @@
                     <small class="text-warning">للنقل والخدمات اللوجستية</small>
                 </div>
                 
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" onclick="showSection('dashboard')">
-                            <i class="fa-solid fa-chart-pie me-2"></i> لوحة العمليات
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white-50" href="#" onclick="showSection('fleet')">
-                            <i class="fa-solid fa-truck-moving me-2"></i> إدارة الأسطول
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white-50" href="#" onclick="showSection('drivers')">
-                            <i class="fa-solid fa-users me-2"></i> شؤون السائقين
-                        </a>
-                    </li>
-                </ul>
+                <div class="nav flex-column">
+                    <a class="nav-link active" href="#" id="link-dashboard" onclick="showSection('dashboard')">
+                        <i class="fa-solid fa-chart-pie me-2"></i> لوحة العمليات
+                    </a>
+                    <a class="nav-link" href="#" id="link-fleet" onclick="showSection('fleet')">
+                        <i class="fa-solid fa-truck-moving me-2"></i> إدارة الأسطول
+                    </a>
+                    <a class="nav-link" href="#" id="link-drivers" onclick="showSection('drivers')">
+                        <i class="fa-solid fa-users me-2"></i> شؤون السائقين
+                    </a>
+                </div>
             </nav>
 
             <!-- مساحة العمل الرئيسية -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 
                 <!-- الشريط العلوي -->
-                <div class="d-flex justify-content-between align-items-center bg-white p-3 rounded-3 shadow-sm mb-4">
+                <div class="d-flex justify-content-between align-items-center bg-white p-3 rounded-3 shadow-sm mb-4 border">
                     <div>
-                        <h4 class="fw-bold m-0">نظام المتابعة اللوجستي الحي</h4>
+                        <h4 class="fw-bold m-0 text-dark">نظام المتابعة اللوجستي الحي</h4>
                         <small class="text-muted">مراقبة حركة النقل لشركة قمة الريادة</small>
                     </div>
                     <span class="badge bg-light text-dark p-2 fs-6 border" id="current-date"></span>
@@ -71,7 +64,7 @@
                     <!-- الكروت الرقمية -->
                     <div class="row g-3 mb-4">
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="card p-3 kpi-card d-flex flex-row align-items-center justify-content-between border">
+                            <div class="card kpi-card d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                     <small class="text-muted d-block mb-1">شحنات قيد التوصيل</small>
                                     <h3 class="fw-bold m-0" id="total-shipments">2</h3>
@@ -80,7 +73,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="card p-3 kpi-card d-flex flex-row align-items-center justify-content-between border">
+                            <div class="card kpi-card d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                     <small class="text-muted d-block mb-1">معدل التسليم الناجح</small>
                                     <h3 class="fw-bold text-success m-0">98.4%</h3>
@@ -89,16 +82,16 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="card p-3 kpi-card d-flex flex-row align-items-center justify-content-between border">
+                            <div class="card kpi-card d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                     <small class="text-muted d-block mb-1">المركبات بالخدمة</small>
                                     <h3 class="fw-bold m-0">45 شاحنة</h3>
                                 </div>
-                                <div class="kpi-icon bg-blue-subtle text-primary-emphasis"><i class="fa-solid fa-warehouse"></i></div>
+                                <div class="kpi-icon bg-primary-subtle text-primary-emphasis"><i class="fa-solid fa-warehouse"></i></div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="card p-3 kpi-card d-flex flex-row align-items-center justify-content-between border">
+                            <div class="card kpi-card d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                     <small class="text-muted d-block mb-1">السائقين على الطريق</small>
                                     <h3 class="fw-bold text-info m-0">32 سائق</h3>
@@ -137,6 +130,17 @@
                                         <td><span class="badge bg-primary">على الطريق حالياً</span></td>
                                         <td><button class="btn btn-link text-danger p-0" onclick="deleteRow(this)"><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>
+                                    <tr>
+                                        <td class="fw-bold">توزيع لوجستي داخلي (مستودعات الدمام)</td>
+                                        <td>عبد الله العتيبي</td>
+                                        <td>
+                                            <div class="progress" style="height: 6px; width: 100px;">
+                                                <div class="progress-bar bg-green" style="width: 100%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-success">تم تفريغ الحمولة</span></td>
+                                        <td><button class="btn btn-link text-danger p-0" onclick="deleteRow(this)"><i class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -147,17 +151,5 @@
                 <div id="section-fleet" class="d-none">
                     <div class="card shadow-sm border rounded-3 overflow-hidden">
                         <div class="card-header bg-white py-3">
-                            <h5 class="m-0 fw-bold text-primary"><i class="fa-solid fa-truck-moving me-2 text-warning"></i>سجل أسطول المركبات والشاحنات</h5>
+                            <h5 class="m-0 fw-bold text-dark"><i class="fa-solid fa-truck-moving me-2 text-warning"></i>سجل أسطول المركبات والشاحنات</h5>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>رقم اللوحة</th>
-                                        <th>نوع الشاحنة</th>
-                                        <th>حالة الصيانة</th>
-                                        <th>الاستمارة</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
